@@ -1,4 +1,5 @@
 import { Flex, Img, SimpleGrid, useDisclosure } from "@chakra-ui/react";
+import { useState } from "react";
 import { CollectionsModal } from "./CollectionsModal";
 interface ICollections {
 	images: any[];
@@ -7,6 +8,7 @@ interface ICollections {
 export const Collections: React.FC<ICollections> = props => {
 	const { images } = props;
 	const { isOpen, onOpen, onClose } = useDisclosure();
+	const [selectedImage, setSelectedImage] = useState<any>();
 	return (
 		<Flex
 			w="100%"
@@ -17,12 +19,23 @@ export const Collections: React.FC<ICollections> = props => {
 			onClick={onOpen}
 			justifyContent="center"
 		>
-			<CollectionsModal images={images} isOpen={isOpen} onClose={onClose} />
-			<Flex onClick={onOpen}>
+			<CollectionsModal
+				allImages={images}
+				isOpen={isOpen}
+				onClose={onClose}
+				selectedImage={selectedImage}
+				setSelectedImage={setSelectedImage}
+			/>
+			<Flex
+				onClick={() => {
+					onOpen();
+					setSelectedImage(images[0] ?? null);
+				}}
+			>
 				<Img
 					width="34.75rem"
 					height="25rem"
-					src={`/api/file/${images[0]}`}
+					src={`/api/file/${images[0] ?? null}`}
 					borderLeftRadius="0.75rem"
 					_hover={{ cursor: "pointer", filter: "brightness(90%)" }}
 					transition="200ms"
@@ -32,34 +45,46 @@ export const Collections: React.FC<ICollections> = props => {
 				<Img
 					w="17.125rem"
 					h="12.25rem"
-					src={`/api/file/${images[1]}`}
-					onClick={onOpen}
+					src={`/api/file/${images[1] ?? null}`}
 					_hover={{ cursor: "pointer", filter: "brightness(90%)" }}
 					transition="200ms"
+					onClick={() => {
+						onOpen();
+						setSelectedImage(images[1] ?? null);
+					}}
 				/>
 				<Img
 					w="17.125rem"
 					h="12.25rem"
-					src={`/api/file/${images[2]}`}
+					src={`/api/file/${images[2] ?? null}`}
 					borderTopRightRadius="0.75rem"
-					onClick={onOpen}
+					onClick={() => {
+						onOpen();
+						setSelectedImage(images[2] ?? null);
+					}}
 					_hover={{ cursor: "pointer", filter: "brightness(90%)" }}
 					transition="200ms"
 				/>
 				<Img
 					w="17.125rem"
 					h="12.25rem"
-					src={`/api/file/${images[3]}`}
-					onClick={onOpen}
+					src={`/api/file/${images[3] ?? null}`}
+					onClick={() => {
+						onOpen();
+						setSelectedImage(images[3] ?? null);
+					}}
 					_hover={{ cursor: "pointer", filter: "brightness(90%)" }}
 					transition="200ms"
 				/>
 				<Img
 					w="17.125rem"
 					h="12.25rem"
-					src={`/api/file/${images[4]}`}
+					src={`/api/file/${images[4] ?? null}`}
 					borderBottomRightRadius="0.75rem"
-					onClick={onOpen}
+					onClick={() => {
+						onOpen();
+						setSelectedImage(images[4] ?? null);
+					}}
 					_hover={{ cursor: "pointer", filter: "brightness(90%)" }}
 					transition="200ms"
 				/>

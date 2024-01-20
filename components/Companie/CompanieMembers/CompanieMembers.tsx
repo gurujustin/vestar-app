@@ -5,7 +5,7 @@ import { ICompanieMembers } from "./dto";
 export const CompanieMember: FunctionComponent<ICompanieMembers> = ({
 	image,
 	name,
-	occupation,
+	position,
 }) => {
 	return (
 		<Flex flexDirection="column" gap="0.5rem" alignItems="center">
@@ -22,7 +22,7 @@ export const CompanieMember: FunctionComponent<ICompanieMembers> = ({
 				flexDirection="column"
 			>
 				<Text>{name}</Text>
-				<Text fontWeight="400">{occupation}</Text>
+				<Text fontWeight="400">{position}</Text>
 			</Flex>
 		</Flex>
 	);
@@ -31,7 +31,7 @@ export const CompanieMember: FunctionComponent<ICompanieMembers> = ({
 export const CompanieMembers: FunctionComponent<any> = ({
 	image,
 	name,
-	occupation,
+	position,
 }) => {
 	return (
 		<SimpleGrid
@@ -41,7 +41,7 @@ export const CompanieMembers: FunctionComponent<any> = ({
 			rowGap="2.75rem"
 			mt="2rem"
 		>
-			<CompanieMember image={image} name={name} occupation={occupation} />
+			<CompanieMember image={image} name={name} position={position} />
 		</SimpleGrid>
 	);
 };

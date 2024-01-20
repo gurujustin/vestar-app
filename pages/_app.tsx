@@ -14,7 +14,7 @@ import "../styles/mapsLabel.css";
 import "../styles/tooltipChart.css";
 import "../styles/pieChart.css";
 import "../helpers/i18";
-import { useEffect, useState } from "react";
+import NextNProgress from "nextjs-progressbar";
 
 const toasty = {
 	bg: "#FFFFFF",
@@ -33,6 +33,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
 							<ChakraProvider resetCSS theme={theme}>
 								<ToastyProvider {...toasty}>
 									<AppWrapper>
+										<NextNProgress />
 										<Component {...pageProps} />
 									</AppWrapper>
 								</ToastyProvider>

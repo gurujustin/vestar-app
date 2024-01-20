@@ -3,10 +3,9 @@ import {
 	Account,
 	createWalletClient,
 	custom,
-	getAccount,
 	WalletClient,
+	defineChain,
 } from "viem";
-import { polygonMumbai } from "viem/chains";
 import PersistentFramework from "../utils/persistent";
 
 declare let window: any;
@@ -16,8 +15,37 @@ interface IWallet {
 	wallet: WalletClient;
 	account: `0x${string}`;
 	isConnected: any;
-	signer: Account;
+	signer: `0x${string}`;
 }
+
+const ripple = defineChain({
+	id: 1440002,
+	name: "XRPL EVM Sidechain",
+	network: "xrpl",
+	nativeCurrency: {
+		decimals: 6,
+		name: "XRP",
+		symbol: "XRP",
+	},
+	rpcUrls: {
+		default: {
+			http: ["https://rpc-evm-sidechain.xrpl.org"],
+		},
+	},
+	blockExplorers: {
+		default: { name: "Explorer", url: "https://evm-sidechain.xrpl.org" },
+	},
+	contracts: {
+		compliantToken: {
+			address: "0x8AA894614874a22c74dCa03c6421655bc590a072",
+			blockCreated: 5443218,
+		},
+		crowdSale: {
+			address: "0x43146a4a32E44Bd1e166b1F8062b99C38aA19072",
+			blockCreated: 5443220,
+		},
+	},
+});
 
 export const WalletContext = createContext({} as IWallet);
 
@@ -27,13 +55,14 @@ export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({
 	let wallet: any;
 	const [isConnected, setIsConnected] = useState<boolean>(false);
 	const [account, setAccount] = useState<`0x${string}` | any>("");
-	const [signer, setSigner] = useState<Account | any>();
+	const [signer, setSigner] = useState<`0x${string}` | any>();
 
 	if (
 		typeof window !== "undefined" &&
 		typeof window?.ethereum !== "undefined"
 	) {
 		wallet = createWalletClient({
+			chain: ripple,
 			transport: custom(window.ethereum),
 		});
 	}
@@ -45,18 +74,17 @@ export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({
 		) {
 			try {
 				const chainId = await wallet.getChainId();
-				if (chainId !== polygonMumbai.id) {
+				if (chainId !== ripple.id) {
 					await wallet
-						.switchChain({ id: polygonMumbai.id })
+						.switchChain({ id: ripple.id })
 						.catch(async (error: any) => {
-							if (error.code === 4902)
-								await wallet.addChain({ chain: polygonMumbai });
+							if (error.code === 4902) await wallet.addChain({ chain: ripple });
 						});
 				} else {
 					const [address] = await wallet.requestAddresses();
 					setAccount(address);
 					setIsConnected(true);
-					setSigner(getAccount(address));
+					setSigner(address);
 					PersistentFramework.add("connected", { isConnected: true });
 					PersistentFramework.add("address", address);
 				}
@@ -84,7 +112,7 @@ export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({
 		const value = PersistentFramework.get("connected") as { [k: string]: any };
 
 		if (value?.isConnected) {
-			const address = PersistentFramework.get("address") as `0x${string}`;
+			const address = PersistentFramework.get("address") as any;
 
 			setIsConnected(true);
 			setAccount(address);

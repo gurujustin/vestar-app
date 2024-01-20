@@ -87,32 +87,51 @@ export const CreateAccountContainer: React.FC<ComponentProps> = props => {
 	};
 
 	return (
-		<Flex
-			w={"100vw"}
-			h="100vh"
-			flexDirection="column"
-			alignItems={"center"}
-			justifyContent="center"
-		>
-			<RegisterSteps />
-			<Img
-				position={"absolute"}
-				zIndex={"1"}
-				w="100vw"
-				h="100vh"
-				src="/images/backgrounds/loginBg.jpg"
-			/>
+		<Flex w={"100vw"} h="100vh" flexDirection="column">
+			<Flex
+				w={"100%"}
+				h="9.8125rem"
+				justifyContent="center"
+				bgGradient="linear(to-b, #001a29, #003243)"
+			>
+				<Text
+					fontFamily="Poppins"
+					fontStyle="normal"
+					fontWeight="600"
+					fontSize="1.875rem"
+					color="#ffffff"
+					lineHeight="2.25rem"
+					mb="2.6875rem"
+					left={"5%"}
+					top={"6%"}
+					position={"absolute"}
+				>
+					{t("register.hello")}
+				</Text>
+				<Img
+					objectFit={"cover"}
+					src="/images/vestar-assets/textureVestar.png"
+				/>
+			</Flex>
+
 			<Flex
 				flexDir={"column"}
 				zIndex={"99"}
 				p="3rem"
 				borderRadius={"12px"}
+				bg="white"
+				w={"100vw"}
+				h="100%"
+				justifyContent={"center"}
+				alignItems="center"
 				boxShadow="0rem 1.25rem 1.5625rem rgba(31, 41, 55, 0.1), 0rem 0.625rem 0.625rem rgba(31, 41, 55, 0.04)"
 			>
+				<RegisterSteps />
+
 				{firstStep ? (
 					<SlideFade in={firstStep} offsetY="-30px">
 						<Text
-							bgGradient="linear(to-r, #3a8da0, #9ccbd6 )"
+							bgGradient="linear(to-r, #003243, #9ccbd6 )"
 							bgClip="text"
 							fontSize="1.2rem"
 							fontWeight="extrabold"
@@ -132,7 +151,7 @@ export const CreateAccountContainer: React.FC<ComponentProps> = props => {
 								fontWeight="500"
 								fontSize="0.875rem"
 								lineHeight="1.25rem"
-								color="#2D3748"
+								color="#003243"
 							>
 								E-mail
 							</Text>
@@ -167,7 +186,7 @@ export const CreateAccountContainer: React.FC<ComponentProps> = props => {
 									fontWeight="500"
 									fontSize="0.875rem"
 									lineHeight="1.25rem"
-									color="#2D3748"
+									color="#003243"
 									display={"flex"}
 								>
 									{t("forgotPassword.newPassword") as string}
@@ -220,7 +239,7 @@ export const CreateAccountContainer: React.FC<ComponentProps> = props => {
 									fontWeight="500"
 									fontSize="0.875rem"
 									lineHeight="1.25rem"
-									color="#2D3748"
+									color="#003243"
 									display={"flex"}
 								>
 									{t("forgotPassword.confirmPassword") as string}
@@ -264,7 +283,7 @@ export const CreateAccountContainer: React.FC<ComponentProps> = props => {
 									password={firstPassword}
 								/>
 							</Flex>
-							<Flex mt={"10"}>
+							<Flex mt={"10"} gap="2">
 								<Button
 									fontStyle="normal"
 									fontWeight="500"
@@ -275,10 +294,35 @@ export const CreateAccountContainer: React.FC<ComponentProps> = props => {
 									borderRadius="0.5rem"
 									w="100%"
 									h="2.2rem"
-									bgColor="#1789A3"
+									bgColor="#003243"
 									_hover={{
 										cursor: "pointer",
-										bgColor: "#007D99",
+										bgColor: "#003243",
+										boxShadow:
+											"0px 1px 3px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.06)",
+									}}
+									onClick={() => {
+										setFirstStep(true);
+										setSecondStep(false);
+										push("/");
+									}}
+								>
+									{t("register.back")}
+								</Button>
+								<Button
+									fontStyle="normal"
+									fontWeight="500"
+									fontSize="0.875rem"
+									lineHeight="1.25rem"
+									color="#FFFFFF"
+									border="none"
+									borderRadius="0.5rem"
+									w="100%"
+									h="2.2rem"
+									bgColor="#003243"
+									_hover={{
+										cursor: "pointer",
+										bgColor: "#003243",
 										boxShadow:
 											"0px 1px 3px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.06)",
 									}}
@@ -394,7 +438,7 @@ export const CreateAccountContainer: React.FC<ComponentProps> = props => {
 									<Text
 										fontSize="0.875rem"
 										lineHeight="1.25rem"
-										color="#2D3748"
+										color="#003243"
 									>
 										{t("register.iAgree") as any}
 									</Text>
@@ -412,7 +456,7 @@ export const CreateAccountContainer: React.FC<ComponentProps> = props => {
 										gap="0.5rem"
 										bgColor="transparent"
 										border="1px solid #323841"
-										color="#171923"
+										color="#003243"
 										_hover={{ bgColor: "#F7FAFC" }}
 										fontFamily="Poppins"
 										fontStyle="normal"
@@ -438,10 +482,10 @@ export const CreateAccountContainer: React.FC<ComponentProps> = props => {
 										borderRadius="0.5rem"
 										w="50%"
 										h="2.2rem"
-										bgColor="#1789A3"
+										bgColor="#003243"
 										_hover={{
 											cursor: "pointer",
-											bgColor: "#007D99",
+											bgColor: "#003243",
 											boxShadow:
 												"0px 1px 3px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.06)",
 										}}

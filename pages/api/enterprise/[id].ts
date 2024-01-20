@@ -88,7 +88,6 @@ router.get(async (req, res) => {
 		}
 
 		const enterprise = await Enterprise.findById(id).lean();
-		console.log(enterprise, "enterprise");
 		if (!enterprise) {
 			return res.status(404).json({ error: "enterprise not found" });
 		}

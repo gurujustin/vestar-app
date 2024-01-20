@@ -29,6 +29,9 @@ export interface IOpportunitiesCard {
 	finished?: boolean;
 	sale_end_at?: any;
 	isAvailable?: boolean;
+	sale_address?: string;
+	compliant_address?: string;
+
 }
 
 export interface IOpportunitieAddress {

@@ -112,7 +112,6 @@ export const MenuInputs: FunctionComponent = () => {
 				param="min_investment"
 			/>
 			<Button
-				placeholder="Localização"
 				color="#2D3748"
 				onClick={() => router.push("/oportunidades")}
 				cursor={"pointer"}

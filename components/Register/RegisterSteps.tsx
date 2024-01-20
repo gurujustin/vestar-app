@@ -14,7 +14,7 @@ const RegisterStep: FunctionComponent<IRegisterSteps> = ({
 		<Flex gap="0.7762rem" alignItems="center">
 			<Flex
 				borderRadius="full"
-				bgColor={barPercentage !== 0 ? "#007088" : "#EDF2F7"}
+				bgColor={barPercentage !== 0 ? "#003243" : "#EDF2F7"}
 				w="1.9737rem"
 				h="1.9737rem"
 				justifyContent="center"
@@ -42,7 +42,7 @@ const RegisterStep: FunctionComponent<IRegisterSteps> = ({
 					color={
 						barPercentage !== 0
 							? barPercentage === 50
-								? "#007088"
+								? "#003243"
 								: "#000000"
 							: "#A0AEC0"
 					}
@@ -61,6 +61,7 @@ const RegisterStep: FunctionComponent<IRegisterSteps> = ({
 					h="0.3481rem"
 					bgColor="#EDF2F7"
 					className="percentage"
+					colorScheme={"#003243"}
 				/>
 			</Flex>
 		</Flex>
@@ -72,7 +73,7 @@ export const RegisterSteps: FunctionComponent = () => {
 	const { t } = useTranslation();
 
 	return (
-		<Flex gap="3.875rem" zIndex={"99"} mt={"3rem"} mb="1rem">
+		<Flex gap="3.875rem" zIndex={"99"} mb="1rem" justifyContent={"center"}>
 			<RegisterStep
 				step={1}
 				title={t("login.register")}

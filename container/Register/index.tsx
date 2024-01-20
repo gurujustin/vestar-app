@@ -32,11 +32,6 @@ export const RegisterContainer: FunctionComponent = (props: any) => {
 						>
 							{t("register.hello")}
 						</Text>
-						<Img
-							w="max-content"
-							h="100%"
-							src="images/backgrounds/LivnPattern.png"
-						/>
 					</Flex>
 					<Flex justifyContent="center" alignItems="center">
 						<RegisterSteps />

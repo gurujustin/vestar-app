@@ -78,7 +78,7 @@ export const Maps: FunctionComponent<IMaps> = ({
 							<MarkerF
 								key={index}
 								icon={{
-									url: "/images/icons/Home-Maps.svg",
+									url: "/icons/Home-Maps.svg",
 									scaledSize: new google.maps.Size(57, 57),
 									labelOrigin: new google.maps.Point(30, -32),
 								}}
@@ -98,7 +98,7 @@ export const Maps: FunctionComponent<IMaps> = ({
 					>
 						<MarkerF
 							icon={{
-								url: "/images/icons/Home-Maps.svg",
+								url: "/icons/Home-Maps.svg",
 								scaledSize: new google.maps.Size(57, 57),
 								labelOrigin: new google.maps.Point(30, -32),
 							}}

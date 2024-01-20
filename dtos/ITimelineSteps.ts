@@ -4,7 +4,7 @@ export interface ITimelineSteps {
 		year: number;
 		data: Array<{
 			quarter: string;
-			info: Array<{ name: string; status: string }>;
+			info: Array<{ name_en?: string; name_pt?: string; status: string }>;
 		}>;
 	};
 }

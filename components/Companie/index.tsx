@@ -18,6 +18,7 @@ export const CompaniePage: FunctionComponent<ICompanie> = ({
 	companieDetail,
 }) => {
 	const { t } = useTranslation();
+
 	return (
 		<Flex flexDirection="column" gap="2rem" mt="6.25rem" mb="4.5rem">
 			<Flex
@@ -56,7 +57,7 @@ export const CompaniePage: FunctionComponent<ICompanie> = ({
 									border="0.0625rem solid #E5E7EB"
 									borderRadius="0rem 0.75rem 0.75rem 0rem"
 									fontFamily="Poppins"
-									pr={["unset", "unset", "unset", "6rem", "3.625rem"]}
+									pr={["unset", "unset", "unset", "6rem", "4.625rem"]}
 									alignItems={["unset", "unset", "unset", "unset", "center"]}
 									justifyContent="end"
 									gap={["unset", "unset", "unset", "1.5rem", "3.5rem"]}
@@ -71,7 +72,7 @@ export const CompaniePage: FunctionComponent<ICompanie> = ({
 											lineHeight="1.25rem"
 											color="#007D99"
 										>
-											{t("companieDetails.livnProp")}
+											{t("companieDetails.REPProp")}
 										</Text>
 										<Text fontSize="1rem" lineHeight="1.5rem" color="#171923">
 											{companieDetail?.enterprise_info?.enterprises_livn}
@@ -107,10 +108,10 @@ export const CompaniePage: FunctionComponent<ICompanie> = ({
 											lineHeight="1.25rem"
 											color="#007D99"
 										>
-											{t("companieDetails.vgv")}
+											{t("companieDetails.yearMarket")}
 										</Text>
 										<Text fontSize="1rem" lineHeight="1.5rem" color="#171923">
-											{companieDetail?.enterprise_info?.total_vgv}
+											45
 										</Text>
 									</Flex>
 								</Flex>

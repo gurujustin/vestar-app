@@ -36,7 +36,7 @@
 		"fullName": "Nome Completo",
 		"birthDate": "Data de Nascimento",
 		"socialNumber": "CPF",
-		"whoInvited": "Quem convidou você para o REP?",
+		"whoInvited": "Quem convidou você para o Vestar?",
 		"legalPerson": "Sou Pessoa Jurídica",
 		"corporateName": "Razão Social",
 		"nationalRegister": "CNPJ",
@@ -49,7 +49,7 @@
 		"noAbbreviations": "Sem abreviações"
 	},
 	"opportunities": {
-		"investingIs": "Investir é muito mais fácil com o REP",
+		"investingIs": "Investir é muito mais fácil com o Vestar",
 		"first": "Abra uma oportunidade disponível para você",
 		"second": "Selecione a quantidade de tokens que você deseja",
 		"third": "Clique em Quero investir e faça o pagamento",
@@ -82,6 +82,8 @@
 		"start": "Início da Obra",
 		"initial": "Preço Inicial m²",
 		"final": "Preço Final m²",
+		"description": "Experimente uma vida de luxo como nunca antes no XR-Plaza, um novo sonho imobiliário que irá agraciar o local mais prestigiado e procurado de Florianópolis. Eleve seu estilo de vida com elegância incomparável e design moderno. Aproveite esta oportunidade exclusiva de investimento e faça parte do extraordinário legado que o XR-Plaza está preparado para criar no coração de Florianópolis.",
+		"neighbor_description": "A Beira Mar Norte em Florianópolis, Santa Catarina, é uma joia à beira-mar que cativa com sua paisagem deslumbrante e atmosfera vibrante. Com um calçadão pitoresco à margem da Baía Norte, oferece uma variedade de opções gastronômicas, espaços de lazer e uma vista panorâmica da Ponte Hercílio Luz. Esta região encantadora combina o charme histórico com uma vida moderna dinâmica, proporcionando uma experiência única que captura a essência acolhedora e sofisticada de Florianópolis.",
 		"select": "Selecione a Quantidade",
 		"quota": "token",
 		"total": "Total",
@@ -110,7 +112,7 @@
 		"closedIn": "Encerrado em ",
 		"unitPrice": "Preço unitário no próximo lote: R$",
 		"priceCard": {
-			"sharesName": "Nome do Token",
+			"sharesName": "XRPZ",
 			"shares": "{{value}} tokens"
 		}
 	},
@@ -127,24 +129,26 @@
 		"termsOf": "Termos de Compra."
 	},
 	"companies": {
-		"partners": "Empresas parceiras REP",
+		"partners": "Empresas parceiras",
 		"companie": "empresa",
 		"previous": "Anterior",
 		"next": "Próxima",
 		"card": {
 			"opportunities": "Oportunidades Disponíveis",
 			"closed": "Encerradas",
-			"learnMore": "Saiba mais"
+			"learnMore": "Veja perfil completo"
 		}
 	},
 	"companieDetails": {
-		"REPProp": "Empreendimentos REP",
+		"REPProp": "Empreendimentos Vestar",
 		"delivered": "Obras entregues",
 		"inProgress": "Em andamento",
 		"vgv": "VGV Total",
 		"whoBuilds": "Quem constrói nossa história",
 		"learnAbout": "Saiba mais sobre a empresa",
-		"opportunities": "Oportunidades"
+		"opportunities": "Oportunidades",
+		"yearMarket": "Anos de mercado",
+		"description": "A \"Platinum Estate\" é uma empreiteira e incorporadora imobiliária líder no mercado brasileiro, destacando-se por sua trajetória sólida e competências excepcionais. Com uma história de excelência em projetos residenciais e comerciais, a Platinum Estate tem se consolidado como sinônimo de qualidade, inovação e compromisso, proporcionando soluções imobiliárias de classe mundial e conquistando a confiança de seus clientes ao longo dos anos."
 	},
 	"portfolio": {
 		"hello": "Olá, {{Name}} !",

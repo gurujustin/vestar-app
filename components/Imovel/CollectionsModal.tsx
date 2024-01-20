@@ -6,49 +6,86 @@ import {
 	ModalOverlay,
 	Text,
 } from "@chakra-ui/react";
+import { useState } from "react";
 import { GrFormClose } from "react-icons/gr";
 import { Carousel } from "./Carousel";
 
 interface ICollectionsModal {
 	isOpen: boolean;
 	onClose: () => void;
-	images: any;
+	allImages: string[];
+	selectedImage: string;
+	setSelectedImage: any;
 }
 
 export const CollectionsModal: React.FC<ICollectionsModal> = props => {
-	const { isOpen, onClose, images } = props;
+	const { isOpen, onClose, allImages, selectedImage, setSelectedImage } = props;
+	const [currentIndex, setCurrentIndex] = useState(1);
+
+	const handleClose = () => {
+		setSelectedImage("");
+		onClose();
+	};
+
 	return (
 		<>
-			<Modal blockScrollOnMount size="full" isOpen={isOpen} onClose={onClose}>
+			<Modal
+				blockScrollOnMount
+				size="full"
+				isOpen={isOpen}
+				onClose={handleClose}
+			>
 				<ModalOverlay />
-				<ModalContent bgColor={"#ffffff"} h="100%">
-					<ModalBody>
+				<ModalContent bgColor={"#ffffff"}>
+					<ModalBody height="inherit">
 						<Flex
 							justifyContent="center"
 							alignItems="center"
-							h="100%"
+							h="100vh"
 							flexDirection="column"
 							gap="1.125rem"
 						>
 							<Flex
 								gap="1rem"
 								color="#171923"
-								w="95%"
-								maxWidth="70rem"
-								justifyContent="end"
+								w="100%"
+								justifyContent="space-between"
 								alignItems="center"
+								px={"5rem"}
 							>
-								<Text fontFamily="Poppins" fontSize="1rem" lineHeight="1.5rem">
-									Fechar
-								</Text>
-								<Flex _hover={{ cursor: "pointer" }}>
-									<GrFormClose size={22} onClick={onClose} />
+								<Flex>
+									<Text
+										fontFamily="Poppins"
+										fontSize="1rem"
+										lineHeight="1.5rem"
+									>
+										{currentIndex} de {allImages?.length}
+									</Text>
+								</Flex>
+								<Flex
+									transition={"0.5s"}
+									_hover={{ cursor: "pointer", opacity: 0.6 }}
+									onClick={handleClose}
+								>
+									<Text
+										fontFamily="Poppins"
+										fontSize="1rem"
+										lineHeight="1.5rem"
+									>
+										Fechar
+									</Text>
+									<Flex>
+										<GrFormClose size={22} />
+									</Flex>
 								</Flex>
 							</Flex>
 							<Carousel
-								modal_images={images}
-								widthValue="55.8125rem"
-								heightValue="37.5rem"
+								modal_images={allImages}
+								selectedImage={selectedImage}
+								widthValue="85.8125rem"
+								heightValue="50rem"
+								isOpen={isOpen}
+								setCurrentIndex={setCurrentIndex}
 							/>
 						</Flex>
 					</ModalBody>

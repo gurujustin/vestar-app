@@ -92,8 +92,6 @@ export const PersonalDataPF: React.FC<IChangePassword> = props => {
 		await fetchEditInvestorPF(userInfos, request, token)
 			.then(res => {
 				if (res) {
-					console.log(res);
-
 					toast({
 						id: "toast-edit",
 						position: "top-right",

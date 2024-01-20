@@ -5,15 +5,21 @@ import { MenuInputs } from "../../components";
 import { OpportunitiesCards } from "../../components";
 import { useUser } from "../../hooks/useUser";
 import { useTranslation } from "react-i18next";
+import { useRouter } from "next/router";
 
 export const OpportunitiesContainer: FunctionComponent = (props: any) => {
 	const { getInfosId } = useUser();
 	const [bannerRes] = useMediaQuery("(max-width: 1110px)");
 	const { t } = useTranslation();
+	const { prefetch } = useRouter();
 
 	useEffect(() => {
 		getInfosId(props?.user?.email);
 	}, [getInfosId, props?.user?.email]);
+
+	useEffect(() => {
+		prefetch("/empresas");
+	}, [prefetch]);
 
 	return (
 		<DefaultTemplate>
@@ -29,7 +35,7 @@ export const OpportunitiesContainer: FunctionComponent = (props: any) => {
 						<Flex
 							w="100%"
 							h="21.3125rem"
-							background="linear-gradient(91.4deg, #BBA1FF 40.04%, #E3FCFC 140.32%)"
+							bgGradient="linear(to-b, #001a29, #003243)"
 							mixBlendMode="multiply"
 							transform="matrix(-1, 0, 0, 1, 0, 0)"
 							position="absolute"
@@ -69,8 +75,29 @@ export const OpportunitiesContainer: FunctionComponent = (props: any) => {
 							maxWidth="47rem"
 						>
 							<Flex justifyContent="space-between" w="100%" gap="1.5rem">
-								<Flex flexDirection="column" gap="0.625rem">
-									<Img src="images/firstIcon.png" w="2.2rem" h="2.8rem" />
+								<Flex
+									flexDirection="column"
+									justifyContent={"center"}
+									gap="0.625rem"
+								>
+									<Flex position={"relative"}>
+										<Flex
+											borderRadius={"999px"}
+											w={"2.3rem"}
+											h="2.3rem"
+											bg={"#29525f"}
+										/>
+										<Text
+											position={"absolute"}
+											color={"white"}
+											fontSize={"3xl"}
+											fontWeight="700"
+											bottom={"25%"}
+											left={"15%"}
+										>
+											1
+										</Text>
+									</Flex>{" "}
 									<Text
 										fontFamily="Poppins"
 										fontSize="1rem"
@@ -82,7 +109,24 @@ export const OpportunitiesContainer: FunctionComponent = (props: any) => {
 									</Text>
 								</Flex>
 								<Flex flexDirection="column" gap="0.625rem">
-									<Img src="images/secondIcon.png" w="2.2rem" h="2.8rem" />
+									<Flex position={"relative"}>
+										<Flex
+											borderRadius={"999px"}
+											w={"2.3rem"}
+											h="2.3rem"
+											bg={"#29525f"}
+										/>
+										<Text
+											position={"absolute"}
+											color={"white"}
+											fontSize={"3xl"}
+											fontWeight="700"
+											bottom={"25%"}
+											left={"12%"}
+										>
+											2
+										</Text>
+									</Flex>
 									<Text
 										fontFamily="Poppins"
 										fontSize="1rem"
@@ -94,7 +138,24 @@ export const OpportunitiesContainer: FunctionComponent = (props: any) => {
 									</Text>
 								</Flex>
 								<Flex flexDirection="column" gap="0.625rem">
-									<Img src="images/thirdIcon.png" w="2.2rem" h="2.8rem" />
+									<Flex position={"relative"}>
+										<Flex
+											borderRadius={"999px"}
+											w={"2.3rem"}
+											h="2.3rem"
+											bg={"#29525f"}
+										/>
+										<Text
+											position={"absolute"}
+											color={"white"}
+											fontSize={"3xl"}
+											fontWeight="700"
+											bottom={"25%"}
+											left={"12%"}
+										>
+											3
+										</Text>
+									</Flex>{" "}
 									<Text
 										fontFamily="Poppins"
 										fontSize="1rem"
@@ -106,7 +167,20 @@ export const OpportunitiesContainer: FunctionComponent = (props: any) => {
 									</Text>
 								</Flex>
 								<Flex flexDirection="column" gap="0.625rem" pt="0.2rem">
-									<Img src="images/checkIcon.png" w="2.8rem" h="2.6rem" />
+									<Flex position={"relative"}>
+										<Flex
+											borderRadius={"999px"}
+											w={"2.3rem"}
+											h="2.3rem"
+											bg={"#29525f"}
+										/>
+										<Img
+											position={"absolute"}
+											src="/icons/check.svg"
+											bottom={"-2%"}
+											left={"-2%"}
+										/>
+									</Flex>{" "}
 									<Text
 										fontFamily="Poppins"
 										fontSize="1rem"

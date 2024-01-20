@@ -2,6 +2,7 @@ import { Flex, Img, Text } from "@chakra-ui/react";
 import { FunctionComponent } from "react";
 import { FiMapPin } from "react-icons/fi";
 import { ICompanieDetails } from "./dto";
+import { useTranslation } from "react-i18next";
 
 export const CompanieDetails: FunctionComponent<ICompanieDetails> = ({
 	banner,
@@ -11,6 +12,7 @@ export const CompanieDetails: FunctionComponent<ICompanieDetails> = ({
 	location,
 	description,
 }) => {
+	const { t } = useTranslation();
 	return (
 		<Flex w="44.125rem" flexDirection="column" gap="2.5rem">
 			<Flex w="100%" flexDirection="column" borderRadius="0.75rem">
@@ -70,7 +72,7 @@ export const CompanieDetails: FunctionComponent<ICompanieDetails> = ({
 					</Text>
 				</Flex>
 				<Text fontSize="1rem" lineHeight="1.5rem" color="#171923">
-					{description}
+					{t("companieDetails.description")}
 				</Text>
 			</Flex>
 		</Flex>

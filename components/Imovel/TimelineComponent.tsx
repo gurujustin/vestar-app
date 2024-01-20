@@ -2,9 +2,11 @@ import { FunctionComponent } from "react";
 import { Flex, Text } from "@chakra-ui/react";
 import { BsCheck } from "react-icons/bs";
 import { ITimelineSteps } from "../../dtos/ITimelineSteps";
+import { useTranslation } from "react-i18next";
 
 type quarterStyleInfo = {
-	name: string;
+	name_en?: string;
+	name_pt?: string;
 	status: string;
 };
 
@@ -12,13 +14,14 @@ export const TimelineComponent: FunctionComponent<ITimelineSteps> = ({
 	titleWidth,
 	data,
 }) => {
-	console.log(data, "data");
+	const { i18n } = useTranslation();
+
 	const getQuarterStyle = (info: quarterStyleInfo[], quarter: string) => {
 		if (info.every((item: quarterStyleInfo) => item.status === "completed")) {
 			return (
 				<Flex
 					borderRadius="full"
-					bgColor={"#007088"}
+					bgColor={"#003243"}
 					w="1.9737rem"
 					h="1.9737rem"
 					p={"0.375rem"}
@@ -62,7 +65,7 @@ export const TimelineComponent: FunctionComponent<ITimelineSteps> = ({
 			return (
 				<Flex
 					borderRadius="full"
-					bgColor={"#007088"}
+					bgColor={"#003243"}
 					w="1.9737rem"
 					p={"0.375rem"}
 					h="1.9737rem"
@@ -83,7 +86,7 @@ export const TimelineComponent: FunctionComponent<ITimelineSteps> = ({
 			);
 		}
 	};
-
+	console.log(i18n.language);
 	return (
 		<Flex
 			gap="0.7762rem"
@@ -107,7 +110,7 @@ export const TimelineComponent: FunctionComponent<ITimelineSteps> = ({
 						<Flex key={index} flexDirection="row" pb={"1rem"} gap={"0.75rem"}>
 							{quarterStyle}
 							<Flex flexDirection="column" pt="0.1rem" h="100%" gap="0.1913rem">
-								{quarterData?.info?.map(info => {
+								{quarterData?.info?.map((info, index) => {
 									let textColor = "#A0AEC0";
 									let fontWeight = "400";
 									if (info.status === "completed") {
@@ -120,7 +123,7 @@ export const TimelineComponent: FunctionComponent<ITimelineSteps> = ({
 
 									return (
 										<Text
-											key={info.name}
+											key={index}
 											color={textColor}
 											fontFamily="Poppins"
 											fontWeight={fontWeight}
@@ -128,7 +131,7 @@ export const TimelineComponent: FunctionComponent<ITimelineSteps> = ({
 											lineHeight="1rem"
 											w={titleWidth ? titleWidth : "8rem"}
 										>
-											{info.name}
+											{i18n.language === "br" ? info.name_en : info.name_pt}
 										</Text>
 									);
 								})}

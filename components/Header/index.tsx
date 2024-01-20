@@ -1,6 +1,6 @@
 import { Flex, Img, Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { Oval } from "react-loader-spinner";
+import { ColorRing } from "react-loader-spinner";
 import { useUser } from "../../hooks/useUser";
 import { HamburguerMenu } from "./HamburguerMenu";
 import { HeaderLinks } from "./HeaderLinks";
@@ -24,14 +24,12 @@ export const Header: React.FC = () => {
 				onClick={() => push("/oportunidades")}
 				_hover={{ cursor: "pointer" }}
 			>
-				<Text
-					bgGradient="linear(to-l, #1789A3, #9ccbd6)"
-					bgClip="text"
-					fontSize="2rem"
-					fontWeight="extrabold"
-				>
-					REP
-				</Text>{" "}
+				<Img
+					w={"7rem"}
+					src="/images/vestar-assets/Asset 5.png"
+					transition={"0.8s"}
+					_hover={{ opacity: 0.6 }}
+				/>
 			</Flex>
 			<Flex>
 				<HeaderLinks />
@@ -47,17 +45,14 @@ export const Header: React.FC = () => {
 					w={"12rem"}
 					justifyContent="center"
 				>
-					<Oval
+					<ColorRing
 						height={15}
 						width={15}
-						color="#1789A3"
+						colors={["#1789A3", "#1789A3", "#1789A3", "#1789A3", "#1789A3"]}
 						wrapperStyle={{}}
 						wrapperClass=""
 						visible={true}
 						ariaLabel="oval-loading"
-						secondaryColor="#bdbdbd"
-						strokeWidth={2}
-						strokeWidthSecondary={2}
 					/>
 				</Flex>
 			) : (

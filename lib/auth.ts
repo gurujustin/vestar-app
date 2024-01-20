@@ -37,7 +37,7 @@ export function setCookie(
 
 	res.setHeader(
 		"Set-Cookie",
-		serialize(name, String(stringValue), options || cookieOptions)
+		serialize(name, String(stringValue), options || (cookieOptions as any))
 	);
 }
 

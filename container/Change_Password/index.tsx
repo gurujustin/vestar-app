@@ -89,11 +89,6 @@ export const Change_PasswordContainer: FunctionComponent<
 					fontFamily="Poppins"
 				>
 					<Flex flexDirection="column" gap="0.625rem">
-						<Img
-							w="max-content"
-							h="max-content"
-							src="images/backgrounds/LivnLogo.png"
-						/>
 						<Text
 							color="#1789A3"
 							fontSize="0.875rem"

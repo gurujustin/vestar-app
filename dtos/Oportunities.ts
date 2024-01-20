@@ -7,6 +7,7 @@ export interface IOpportunitiesCard {
 	profitability: number;
 	pictures_enterprise: string[];
 	name: string;
+	enterprise_id: string;
 	enterprise_logo: string;
 	enterprise_name: string;
 	enterprise_type: string;
@@ -38,6 +39,8 @@ export interface IOpportunitiesCard {
 	blocked?: boolean;
 	finished?: boolean;
 	sale_end_at: string;
+	sale_address: string;
+	compliant_address: string;
 }
 
 export interface IOpportunitieAddress {
