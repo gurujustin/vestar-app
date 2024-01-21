@@ -108,7 +108,9 @@ export const ImovelContainer: FunctionComponent<IImovelProps> = ({
 					// setTotalSupply(Number(totalSupply));
 					setAvailableTokens(Number(availableTokens));
 					setTokenSold(Number(tokenSold));
-					setUnitPrice(Number(1) / (Number(unitPrice) / Number(1e18)));
+					setUnitPrice(
+						Math.floor(Number(1) / (Number(unitPrice) / Number(1e18)))
+					);
 					setIsOpen(isOpen);
 					setMaxBuyAllowed(Number(maxBuyAllowed) / 1e6);
 					setCloseTime(closeTime);
