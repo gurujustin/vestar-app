@@ -1,19 +1,19 @@
 export const compliantToken = {
-	address: '0x8AA894614874a22c74dCa03c6421655bc590a072',
+	address: "0xEdad2dcAAB2b073106C698Ca7650fa7fbE56771c",
 	abi: [
-		{ inputs: [], stateMutability: 'nonpayable', type: 'constructor' },
+		{ inputs: [], stateMutability: "nonpayable", type: "constructor" },
 		{
 			inputs: [
 				{
 					internalType: "address",
 					name: "_addresses",
-					type: "address"
-				}
+					type: "address",
+				},
 			],
 			name: "addToWhitelist",
 			outputs: [],
 			stateMutability: "nonpayable",
-			type: "function"
+			type: "function",
 		},
 	],
-} as const
+} as const;

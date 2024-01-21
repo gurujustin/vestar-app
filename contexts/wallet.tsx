@@ -37,11 +37,11 @@ const ripple = defineChain({
 	},
 	contracts: {
 		compliantToken: {
-			address: "0x8AA894614874a22c74dCa03c6421655bc590a072",
+			address: "0xEdad2dcAAB2b073106C698Ca7650fa7fbE56771c",
 			blockCreated: 5443218,
 		},
 		crowdSale: {
-			address: "0x43146a4a32E44Bd1e166b1F8062b99C38aA19072",
+			address: "0x10E8e70F3186f5a35db88180C225701b36057Ee0",
 			blockCreated: 5443220,
 		},
 	},

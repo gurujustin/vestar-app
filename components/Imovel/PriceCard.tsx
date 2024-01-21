@@ -37,8 +37,10 @@ export const PriceCard: React.FC<IPriceCard> = props => {
 	const { push, prefetch } = useRouter();
 	const [cotas, setCotas] = useState<number>(0);
 	const [copied, setCopied] = useState(false);
+	const [completedRegister, setCompletedRegister] = useState(false);
 	const { t } = useTranslation();
-	const { callAddToWhitelist, callBuyToken, approve } = useTransactions();
+	const { callAddToWhitelist, callBuyToken, approve, claimTokens } =
+		useTransactions();
 	const { connectWallet, isConnected, signer } = useWallet();
 
 	const handleClick = async (value: string) => {
@@ -62,11 +64,12 @@ export const PriceCard: React.FC<IPriceCard> = props => {
 		currency: "BRL",
 	});
 
-	const earnTokens = async (compliantToken: string, address: string) => {
+	const enterWhitelist = async (compliantToken: string, address: string) => {
 		if (!isConnected || !signer) {
 			return await connectWallet();
 		} else {
-			await await callAddToWhitelist(compliantToken, address);
+			const success = await callAddToWhitelist(compliantToken, address);
+			if (success) setCompletedRegister(true);
 			return;
 		}
 	};
@@ -84,6 +87,15 @@ export const PriceCard: React.FC<IPriceCard> = props => {
 
 			/// BUY
 			await callBuyToken(amount, accountAddress);
+			return;
+		}
+	};
+
+	const claimDREX = async (accountAddress: string) => {
+		if (!isConnected || !signer) {
+			return await connectWallet();
+		} else {
+			await claimTokens(accountAddress);
 			return;
 		}
 	};
@@ -110,7 +122,26 @@ export const PriceCard: React.FC<IPriceCard> = props => {
 			<Text fontSize={"xl"} fontWeight="500">
 				{t("opportunitieDetails.priceCard.sharesName")}
 			</Text>
-			{isInvestidor ? (
+			{ended ? (
+				<Flex
+					fontFamily="Poppins"
+					fontStyle="normal"
+					fontWeight="500"
+					fontSize="1rem"
+					lineHeight="1.5rem"
+					alignItems="center"
+					color="#FFFFFF"
+					w="100%"
+					mt="1rem"
+					flexDirection="column"
+				>
+					<Flex justifyContent="space-between" w="100%">
+						<Text>{t("opportunitieDetails.unit")}</Text>
+						<Text>{price}</Text>
+					</Flex>
+					<Flex w="100%" border="1px solid #29525f" my="1rem" />
+				</Flex>
+			) : (
 				<Flex flexDirection="column">
 					<Flex
 						my="1rem"
@@ -176,8 +207,24 @@ export const PriceCard: React.FC<IPriceCard> = props => {
 							</Text>
 						</Flex>
 
-						<Flex alignItems="center" mt="1rem" gap={"1"}>
-							{isWhitelisted ? (
+						<Flex flexDir="row" alignItems="center" mt="1rem" gap={"2"}>
+							<Button
+								fontWeight={"500"}
+								fontSize={"md"}
+								bgColor="#FFFFFF"
+								color="#007088"
+								w="100%"
+								px="0.625rem"
+								py="1rem"
+								mb={ended ? "none" : "1rem"}
+								isDisabled={ended}
+								transition={"0.7s"}
+								_hover={{ opacity: "0.7" }}
+								onClick={() => claimDREX(signer)}
+							>
+								Earn Drex
+							</Button>
+							{isWhitelisted || completedRegister ? (
 								<Button
 									fontWeight={"500"}
 									fontSize={"md"}
@@ -187,14 +234,18 @@ export const PriceCard: React.FC<IPriceCard> = props => {
 									px="0.625rem"
 									py="1rem"
 									mb={ended ? "none" : "1rem"}
-									isDisabled={ended && !hasToken}
+									isDisabled={ended || cotas <= 0}
 									_hover={
 										ended && !hasToken
 											? { opacity: "0.3" }
 											: { bgColor: "#F7FAFC" }
 									}
 									onClick={() =>
-										buyTokens(oportunitiesAddress, price * cotas, signer)
+										buyTokens(
+											oportunitiesAddress,
+											Number(price) * Number(1e6) * cotas,
+											signer
+										)
 									}
 								>
 									{ended
@@ -205,44 +256,22 @@ export const PriceCard: React.FC<IPriceCard> = props => {
 								<Button
 									fontWeight={"500"}
 									fontSize={"md"}
-									bgColor="#FFFFFF"
-									color="#007088"
+									bgColor="transparent"
+									border="1px solid #007088"
 									w="100%"
 									px="0.625rem"
 									py="1rem"
 									mb={ended ? "none" : "1rem"}
-									isDisabled={ended && !hasToken}
-									_hover={
-										ended && !hasToken
-											? { opacity: "0.3" }
-											: { bgColor: "#F7FAFC" }
-									}
-									onClick={() => earnTokens(compliantToken, signer)}
+									isDisabled={ended}
+									transition={"0.7s"}
+									_hover={{ opacity: "0.7" }}
+									onClick={() => enterWhitelist(compliantToken, signer)}
 								>
-									Earn tokens
+									Enter Whitelist
 								</Button>
 							)}
 						</Flex>
 					</Flex>
-				</Flex>
-			) : (
-				<Flex
-					fontFamily="Poppins"
-					fontStyle="normal"
-					fontWeight="500"
-					fontSize="1rem"
-					lineHeight="1.5rem"
-					alignItems="center"
-					color="#FFFFFF"
-					w="100%"
-					mt="1rem"
-					flexDirection="column"
-				>
-					<Flex justifyContent="space-between" w="100%">
-						<Text>{t("opportunitieDetails.unit")}</Text>
-						<Text>{price}</Text>
-					</Flex>
-					<Flex w="100%" border="1px solid #29525f" my="1rem" />
 				</Flex>
 			)}
 			<Flex flexDir={"column"} gap="0.5rem">

@@ -86,7 +86,7 @@ export const TimelineComponent: FunctionComponent<ITimelineSteps> = ({
 			);
 		}
 	};
-	console.log(i18n.language);
+
 	return (
 		<Flex
 			gap="0.7762rem"
@@ -131,7 +131,7 @@ export const TimelineComponent: FunctionComponent<ITimelineSteps> = ({
 											lineHeight="1rem"
 											w={titleWidth ? titleWidth : "8rem"}
 										>
-											{i18n.language === "br" ? info.name_en : info.name_pt}
+											{i18n.language === "br" ? info.name_pt : info.name_en}
 										</Text>
 									);
 								})}

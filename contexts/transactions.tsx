@@ -7,6 +7,7 @@ import { abi as crowdSaleABI } from "../utils/abi/crowdSale.json";
 import { compliantToken } from "../utils/abi/compliantToken";
 import { crowdSale } from "../utils/abi/crowdSale";
 import { drex } from "../utils/abi/drex";
+import { faucet } from "../utils/abi/faucet";
 import PersistentFramework from "../utils/persistent";
 
 declare let window: any;
@@ -25,6 +26,8 @@ interface ITransactions {
 	getTokenSold: any;
 	getIsOpen: any;
 	callBuyToken: any;
+	claimTokens: any;
+	getBalanceOf: any;
 }
 
 export const ripple = defineChain({
@@ -46,11 +49,11 @@ export const ripple = defineChain({
 	},
 	contracts: {
 		compliantToken: {
-			address: "0x8AA894614874a22c74dCa03c6421655bc590a072",
+			address: "0xEdad2dcAAB2b073106C698Ca7650fa7fbE56771c",
 			blockCreated: 5443218,
 		},
 		crowdSale: {
-			address: "0x43146a4a32E44Bd1e166b1F8062b99C38aA19072",
+			address: "0x10E8e70F3186f5a35db88180C225701b36057Ee0",
 			blockCreated: 5443220,
 		},
 	},
@@ -125,7 +128,8 @@ export const TransactionsProvider: React.FC<{ children: React.ReactNode }> = ({
 				args: [account],
 			});
 			const txHash = await wallet?.writeContract(request);
-			await waitForApproval(txHash);
+			const approval: any = await waitForApproval(txHash);
+			return approval.status === "success" ? true : false;
 		} catch (error) {
 			console.log("error", error);
 		}
@@ -274,6 +278,32 @@ export const TransactionsProvider: React.FC<{ children: React.ReactNode }> = ({
 		}
 	};
 
+	const getBalanceOf = async (account: string) => {
+		const balanceOf = await publicClient?.readContract({
+			...drex,
+			functionName: "balanceOf",
+			args: [account],
+		});
+		return balanceOf;
+	};
+
+	//////////////////////////////////
+	// Faucet
+	//////////////////////////////////
+	const claimTokens = async (account: string) => {
+		try {
+			const { request } = await publicClient.simulateContract({
+				...faucet,
+				functionName: "claimTokens",
+				account,
+			});
+			const txHash = await wallet.writeContract(request);
+			await waitForApproval(txHash);
+		} catch (error) {
+			console.log("error", error);
+		}
+	};
+
 	const providerValue = useMemo(
 		() => ({
 			getTokenSold,
@@ -289,6 +319,8 @@ export const TransactionsProvider: React.FC<{ children: React.ReactNode }> = ({
 			getIsOpen,
 			getBoughtTokens,
 			getCloseTime,
+			claimTokens,
+			getBalanceOf,
 		}),
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[]

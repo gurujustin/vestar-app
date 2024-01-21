@@ -42,6 +42,7 @@ export const ImovelContainer: FunctionComponent<IImovelProps> = ({
 	const [boughtTokens, setBoughtTokens] = useState<number>(0);
 	const [isWhitelisted, setIsWhitelisted] = useState<boolean>(false);
 	const [isOpen, setIsOpen] = useState<boolean>(false);
+	const [closeTime, setCloseTime] = useState<any>();
 	const { account } = useWallet();
 	const {
 		getAvailableTokens,
@@ -54,6 +55,7 @@ export const ImovelContainer: FunctionComponent<IImovelProps> = ({
 		getIsWhitelisted,
 		getIsOpen,
 		getBoughtTokens,
+		getCloseTime,
 	} = useTransactions();
 	const { t } = useTranslation();
 
@@ -86,7 +88,33 @@ export const ImovelContainer: FunctionComponent<IImovelProps> = ({
 	useEffect(
 		() => {
 			const getCotas = async () => {
-				if (imovelDetails.token_address && account) {
+				// No wallet connect needed
+				if (imovelDetails.sale_address) {
+					const availableTokens = await getAvailableTokens(
+						imovelDetails.sale_address
+					);
+					const tokenSold = await getTokenSold(imovelDetails.sale_address);
+					const maxBuyAllowed = await getMaxBuyAllowed(
+						imovelDetails.sale_address
+					);
+					const unitPrice = await calculateTokenAmount(
+						imovelDetails.sale_address,
+						1000000
+					);
+					const isOpen = await getIsOpen(imovelDetails.sale_address);
+					let closeTime = await getCloseTime(imovelDetails.sale_address);
+					closeTime = new Date(Number(closeTime) * 1000).toISOString();
+
+					// setTotalSupply(Number(totalSupply));
+					setAvailableTokens(Number(availableTokens));
+					setTokenSold(Number(tokenSold));
+					setUnitPrice(Number(1) / (Number(unitPrice) / Number(1e18)));
+					setIsOpen(isOpen);
+					setMaxBuyAllowed(Number(maxBuyAllowed) / 1e6);
+					setCloseTime(closeTime);
+				}
+
+				if (imovelDetails.sale_address && account) {
 					const forRefund = await getDrexAvailableForRefund(
 						imovelDetails.sale_address,
 						account
@@ -111,7 +139,7 @@ export const ImovelContainer: FunctionComponent<IImovelProps> = ({
 			getCotas();
 		},
 		// eslint-disable-next-line
-		[imovelDetails?.sale_address, account, dateEndend]
+		[imovelDetails?.sale_address, account, dateEndend, closeTime]
 	);
 
 	return (
@@ -220,7 +248,7 @@ export const ImovelContainer: FunctionComponent<IImovelProps> = ({
 										<Text fontSize={"xs"} color="#718096">
 											R$
 										</Text>
-										<Text color="#000000">{`${"1.500,00"}$`}</Text> {/* TODO */}
+										<Text color="#000000">{`${"1.500,00"}`}</Text> {/* TODO */}
 									</Flex>
 								</Flex>
 								<Flex flexDir={"column"} gap="0.25rem" w="8rem">
@@ -231,7 +259,7 @@ export const ImovelContainer: FunctionComponent<IImovelProps> = ({
 										<Text fontSize={"xs"} color="#718096">
 											R$
 										</Text>
-										<Text color="#000000">16.800,00</Text>
+										<Text color="#000000">{maxBuyAllowed}</Text>
 									</Flex>
 								</Flex>
 								<Flex
@@ -336,7 +364,7 @@ export const ImovelContainer: FunctionComponent<IImovelProps> = ({
 								>
 									{/* TODO */}
 									<Countdown
-										date={imovelDetails?.sale_end_at}
+										date={closeTime ?? imovelDetails?.sale_end_at}
 										renderer={renderer}
 									/>
 									<Text
